@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with Routes {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
       home: Navegacao(),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      routes: Routes().routes(),
+      routes: routes(),
     );
   }
 }
