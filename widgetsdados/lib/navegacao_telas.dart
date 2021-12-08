@@ -26,11 +26,7 @@ class _NavegacaoState extends State<Navegacao> {
                 child:
                     Text("Ir para outra tela", style: TextStyle(fontSize: 22)),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TelaSecundaria(_texto)),
-                  );
+                  Navigator.pushNamed(context, "/secundaria");
                 },
               ),
             ),
