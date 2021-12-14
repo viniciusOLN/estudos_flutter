@@ -11,18 +11,13 @@ class PaginaInicial extends StatefulWidget {
 }
 
 class _PaginaInicialState extends State<PaginaInicial> {
-  String _texto =
-      "Clique em atualizar para receber o valor atualizado do bitcoin.";
+  bool _botao = false;
 
-  void _verificarPrecoBitcoin() async {
+  Future<Map> _verificarPrecoBitcoin() async {
     String url = "https://blockchain.info/ticker";
     http.Response response = await http.get(url);
 
-    Map<String, dynamic> retorno = json.decode(response.body);
-
-    setState(() {
-      _texto = "R\$ ${retorno["BRL"]["buy"].toString()}";
-    });
+    return json.decode(response.body);
   }
 
   @override
@@ -37,17 +32,55 @@ class _PaginaInicialState extends State<PaginaInicial> {
             Image.asset("images/bitcoin.png"),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 25, horizontal: 0),
-              child: Text(
-                _texto,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w600,
-                ),
+              child: FutureBuilder<Map>(
+                future: _verificarPrecoBitcoin(),
+                builder: (context, snapshot) {
+                  String _texto = "";
+                  if (_botao) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                        // TODO: Handle this case.
+                        print("a");
+                        break;
+                      case ConnectionState.waiting:
+                        _texto = "Carregando...";
+                        print("carregando");
+                        break;
+                      case ConnectionState.active:
+                        // TODO: Handle this case.
+                        print("oi");
+                        break;
+                      case ConnectionState.done:
+                        if (snapshot.hasError) {
+                          _texto = "Erro ao tentar acessar o valor do bitcoin.";
+                        } else {
+                          double valor = snapshot.data["BRL"]["buy"];
+                          _texto = "R\$" + valor.toString();
+                          print("foi");
+                          _botao = false;
+                        }
+                        break;
+                    }
+                  } else {
+                    _texto =
+                        "Clique em atualizar para receber o valor atualizado do bitcoin.";
+                  }
+                  return Text(
+                    _texto,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  );
+                },
               ),
             ),
             ElevatedButton(
-              onPressed: _verificarPrecoBitcoin,
+              onPressed: () {
+                setState(() {
+                  _botao = true;
+                });
+              },
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 child: Text(
