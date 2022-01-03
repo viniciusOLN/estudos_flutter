@@ -49,16 +49,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
           ),
         ],
       ),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Center(
-              child: telas[_indiceAtual],
-            ),
-          ],
-        ),
-      ),
+      body: telas[_indiceAtual],
       bottomNavigationBar: BottomNavigationBar(
         //cor fixa que se usa ao clicar no item
         //fixedColor: Colors.red,
