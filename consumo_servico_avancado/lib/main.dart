@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'pagina_inicial.dart';
+// import 'pagina_inicial.dart';
+import 'testes/pagina_inicial.dart';
 
 void main() {
   runApp(myApp());
@@ -18,6 +19,7 @@ class _myAppState extends State<myApp> {
     return MaterialApp(
       title: 'Consumo de Serviços Avançados',
       home: PaginaInicial(),
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),

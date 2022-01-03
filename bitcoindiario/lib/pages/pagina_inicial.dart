@@ -35,15 +35,26 @@ class _PaginaInicialState extends State<PaginaInicial> {
               child: FutureBuilder<Map>(
                 future: _verificarPrecoBitcoin(),
                 builder: (context, snapshot) {
-                  String _texto = "";
+                  String _texto;
                   if (_botao) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
-                        // TODO: Handle this case.
-                        print("a");
                         break;
                       case ConnectionState.waiting:
-                        _texto = "Carregando...";
+                        return Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: CircularProgressIndicator(),
+                            ),
+                            Text(
+                              "Carregando...",
+                              style: TextStyle(
+                                fontSize: 25,
+                              ),
+                            ),
+                          ],
+                        );
                         print("carregando");
                         break;
                       case ConnectionState.active:
