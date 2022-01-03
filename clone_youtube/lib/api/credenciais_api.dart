@@ -1,6 +1,7 @@
 abstract class credenciais_api {
-  final String _CHAVE_YOUTUBE = "AIzaSyAno1WFnmQF3CYdjaEdFsS-V3N_vHE5k9U";
-  final String _ID_USUARIO_CONSULTA = "UCVHFbqXqoYvEWM1Ddxl0QDg";
+  final String _CHAVE_YOUTUBE = "YOUR KEY ACESS TO API GOES HERE";
+  final String _ID_USUARIO_CONSULTA =
+      "URL ID USER IN CASE YOU NEED TO SEARCH A SPECIFY USER";
   final String _URL_BASE = "https://www.googleapis.com/youtube/v3/";
 
   String get CHAVE_YOUTUBE => this._CHAVE_YOUTUBE;
