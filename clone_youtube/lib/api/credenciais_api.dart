@@ -9,4 +9,6 @@ abstract class credenciais_api {
   String get ID_USUARIO => this._ID_USUARIO_CONSULTA;
 
   String get URL_BASE => this._URL_BASE;
+
+  teste
 }
