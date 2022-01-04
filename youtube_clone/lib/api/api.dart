@@ -3,6 +3,12 @@ import 'package:youtube_clone/models/video.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+/*
+YOU CAN ADD A NEW FILE AND CREATE AN ABSCTRACT CLASS WITH THE FOLLOWING
+ATRIBUTTES TO ACCES THE API'S YOUTUBE:
+URL_BASE = URL BASE THAT YOU CAN GET IN DEVELOPERS GOOGLE PLATAFORM;
+CHAVE_YOUTUBE = YOUR KEY ACCESS TO YOUTUBE'S API
+*/
 class Api extends credenciais_api {
   Future<List<Video>> pesquisar(String pesquisa) async {
     List<Video> videos;
