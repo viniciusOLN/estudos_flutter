@@ -13,7 +13,6 @@ class _BlocoVideoState extends State<BlocoVideo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 200,
       child: Column(
         children: <Widget>[
           Container(

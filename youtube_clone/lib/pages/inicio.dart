@@ -6,7 +6,8 @@ import 'package:youtube_clone/pages/widgets_inicio/bloco_video.dart';
 import 'package:flutter/material.dart';
 
 class Inicio extends StatefulWidget {
-  const Inicio({Key key}) : super(key: key);
+  String pesquisa;
+  Inicio(this.pesquisa, {Key key}) : super(key: key);
 
   @override
   _InicioState createState() => _InicioState();
@@ -16,14 +17,14 @@ class _InicioState extends State<Inicio> {
   @override
   Widget build(BuildContext context) {
     Api api = Api();
-    _listarVideos() {
+    _listarVideos(String pesquisa) {
       Api api = Api();
-      return api.pesquisar("");
+      return api.pesquisar(pesquisa);
     }
 
     return Container(
       child: FutureBuilder<List<Video>>(
-        future: api.pesquisar(""),
+        future: _listarVideos(widget.pesquisa),
         builder: (context, snapshoot) {
           switch (snapshoot.connectionState) {
             case ConnectionState.none:

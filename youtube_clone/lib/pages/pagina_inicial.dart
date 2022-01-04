@@ -1,3 +1,4 @@
+import 'package:youtube_clone/custom_search_delegate.dart';
 import 'package:youtube_clone/pages/biblioteca.dart';
 import 'package:youtube_clone/pages/em_alta.dart';
 import 'package:youtube_clone/pages/inicio.dart';
@@ -11,18 +12,19 @@ class PaginaInicial extends StatefulWidget {
   _PaginaInicialState createState() => _PaginaInicialState();
 }
 
+int _indiceAtual = 0;
+String _pesquisa = "";
+
 class _PaginaInicialState extends State<PaginaInicial> {
-  int _indiceAtual = 0;
-
-  List<Widget> telas = [
-    Inicio(),
-    EmAlta(),
-    Inscricoes(),
-    Biblioteca(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    List<Widget> telas = [
+      Inicio(_pesquisa),
+      EmAlta(),
+      Inscricoes(),
+      Biblioteca(),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -41,7 +43,15 @@ class _PaginaInicialState extends State<PaginaInicial> {
           ),
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: () {},
+            onPressed: () async {
+              String result = await showSearch(
+                context: context,
+                delegate: CustomSearchDelegate(),
+              );
+              setState(() {
+                _pesquisa = result;
+              });
+            },
           ),
           IconButton(
             icon: Icon(Icons.account_circle),
