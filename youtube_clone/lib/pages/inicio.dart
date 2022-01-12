@@ -4,6 +4,7 @@ import 'package:youtube_clone/pages/widgets_inicio/bloco_video.dart';
 import 'package:youtube_clone/pages/widgets_inicio/bloco_video.dart';
 import 'package:youtube_clone/pages/widgets_inicio/bloco_video.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_youtube/flutter_youtube.dart';
 
 class Inicio extends StatefulWidget {
   String pesquisa;
@@ -60,7 +61,8 @@ class _InicioState extends State<Inicio> {
                     ),
                     itemCount: snapshoot.data.length,
                     itemBuilder: (context, indice) {
-                      return BlocoVideo(snapshoot.data[indice]);
+                      return BlocoVideo(
+                          api.CHAVE_YOUTUBE, snapshoot.data[indice]);
                     },
                   );
                 }

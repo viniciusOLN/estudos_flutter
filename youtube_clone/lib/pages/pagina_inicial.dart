@@ -68,6 +68,11 @@ class _PaginaInicialState extends State<PaginaInicial> {
           setState(() {
             _indiceAtual = indice;
           });
+          if (_indiceAtual == 0) {
+            setState(() {
+              _pesquisa = "";
+            });
+          }
         },
         //utilizado pra quando se tem mais de 3 itens, pra tudo não ficar branco
         type: BottomNavigationBarType.fixed,
