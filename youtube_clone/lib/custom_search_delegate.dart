@@ -3,8 +3,12 @@ import 'package:youtube_clone/api/api.dart';
 import 'package:youtube_clone/models/video.dart';
 
 class CustomSearchDelegate extends SearchDelegate<String> {
-  String pesquisa = "Procurar";
-  CustomSearchDelegate({this.pesquisa}) : super(searchFieldLabel: pesquisa);
+  CustomSearchDelegate({String pesquisa = "Procurar"})
+      : super(
+          searchFieldLabel: pesquisa,
+          keyboardType: TextInputType.text,
+          textInputAction: TextInputAction.search,
+        );
 
   @override
   List<Widget> buildActions(BuildContext context) {
