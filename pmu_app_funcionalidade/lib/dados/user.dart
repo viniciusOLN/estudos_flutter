@@ -4,7 +4,7 @@ class User {
   String matricula;
   String urlFoto;
 
-  String nomeCompleto(String nomeCompleto) {
+  String primeiroNome(String nomeCompleto) {
     return nomeCompleto.split(' ')[0];
   }
 

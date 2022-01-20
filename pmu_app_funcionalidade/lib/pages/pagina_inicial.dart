@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pmu_app_funcionalidade/dados/user.dart';
+import 'package:pmu_app_funcionalidade/pages/widgets_inicio/infos_user.dart';
+import 'package:pmu_app_funcionalidade/pages/widgets_inicio/opcoes_principais.dart';
 import 'widgets_inicio/container_branco.dart';
 import 'widgets_inicio/gravatar_user.dart';
 
@@ -12,7 +14,6 @@ class PaginaInicial extends StatefulWidget {
 
 class _PaginaInicialState extends State<PaginaInicial> {
   User usuario = User();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,45 +30,9 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   children: <Widget>[
                     gravatarUser(usuario.urlFoto),
                     const Padding(
-                        padding: EdgeInsets.only(left: 14, right: 14)),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            const Text(
-                              'Bem-vindo(a), ',
-                              style: TextStyle(fontWeight: FontWeight.w700),
-                            ),
-                            Text(usuario.nomeCompleto(usuario.name) + '!'),
-                          ],
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                        Row(
-                          children: <Widget>[
-                            const Text(
-                              'Curso: ',
-                              style: TextStyle(fontWeight: FontWeight.w700),
-                            ),
-                            Text(usuario.curso),
-                          ],
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                        Row(
-                          children: <Widget>[
-                            const Text(
-                              'Matrícula: ',
-                              style: TextStyle(fontWeight: FontWeight.w700),
-                            ),
-                            Text(usuario.matricula),
-                          ],
-                        ),
-                      ],
+                      padding: EdgeInsets.only(left: 14, right: 14),
                     ),
+                    InfosUser(),
                   ],
                 ),
               ),
@@ -82,6 +47,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   ),
                 ),
               ),
+              OpcoesPrincipais(),
             ],
           ),
         ),
