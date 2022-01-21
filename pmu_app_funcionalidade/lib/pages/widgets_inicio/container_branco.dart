@@ -12,7 +12,7 @@ class _ContainerBrancoState extends State<ContainerBranco> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(5),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(6)),
         color: Colors.white,
