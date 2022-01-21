@@ -11,7 +11,7 @@ class ItemPrincipal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.only(bottom: 20),
       child: ContainerBranco(
         ListTile(
           title: Text(
