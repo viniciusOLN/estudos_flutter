@@ -15,10 +15,17 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Funcionalidade do Minha uespi',
       debugShowCheckedModeBanner: false,
-      home: PaginaInicial(),
+      home: const PaginaInicial(),
+      theme: ThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: const Color.fromRGBO(212, 171, 25, 1),
+          ),
+        ),
+      ),
     );
   }
 }
