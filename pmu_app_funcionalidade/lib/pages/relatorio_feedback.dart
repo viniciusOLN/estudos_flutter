@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+String tipoFeedbackValue = 'Selecione o tipo de feedback';
+String localFeedbackValue = 'Selecione o local do feedback';
+
 Future relatorioFeedback(context) {
   return showDialog(
     context: context,
@@ -22,7 +25,7 @@ Future relatorioFeedback(context) {
                     child: Text(
                       'Encontrou algum erro no aplicativo ou tem algum comentário sobre ele? Nos informe através do questionário abaixo.',
                       style: TextStyle(
-                        fontSize: 10,
+                        fontSize: 12,
                         fontWeight: FontWeight.w600,
                         color: Color.fromRGBO(64, 64, 64, 1),
                       ),
@@ -45,7 +48,81 @@ Future relatorioFeedback(context) {
           color: Color.fromRGBO(64, 64, 64, 1),
         ),
         content: Container(
-          child: Text('oi'),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('Tipo de feedback'),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        color: Colors.blueGrey,
+                        width: 1,
+                        style: BorderStyle.solid),
+                    borderRadius: BorderRadius.circular(8)),
+                child: DropdownButtonFormField(
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                  value: tipoFeedbackValue,
+                  icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                  onChanged: (value) {},
+                  items: <String>[
+                    'Selecione o tipo de feedback',
+                    'Conexão',
+                    'Design',
+                    'Usabilidade',
+                    'Dados errados',
+                    'Outro'
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+              Text('Local do feedback'),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        color: Colors.blueGrey,
+                        width: 1,
+                        style: BorderStyle.solid),
+                    borderRadius: BorderRadius.circular(8)),
+                child: DropdownButtonFormField(
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                  value: localFeedbackValue,
+                  icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                  onChanged: (value) {},
+                  items: <String>[
+                    'Selecione o local do feedback',
+                    'Conexão',
+                    'Design',
+                    'Usabilidade',
+                    'Dados errados',
+                    'Outro'
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+              Text('Descrição do feedback'),
+              TextField(),
+            ],
+          ),
         ),
         actions: <Widget>[
           Directionality(
