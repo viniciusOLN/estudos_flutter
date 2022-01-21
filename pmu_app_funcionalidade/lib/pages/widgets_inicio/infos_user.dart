@@ -16,7 +16,7 @@ class InfosUser extends StatelessWidget {
               'Bem-vindo(a), ',
               style: TextStyle(fontWeight: FontWeight.w700),
             ),
-            Text(usuario.nomeCompleto(usuario.name) + '!'),
+            Text(usuario.primeiroNome(usuario.name) + '!'),
           ],
         ),
         const Padding(
