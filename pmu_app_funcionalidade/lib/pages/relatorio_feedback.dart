@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pmu_app_funcionalidade/pages/widgets_relat%C3%B3rio_feedback/botao_formatado.dart';
-import 'package:pmu_app_funcionalidade/pages/widgets_relat%C3%B3rio_feedback/titulo_input.dart';
+import 'package:pmu_app_funcionalidade/pages/widgets_relatorio_feedback/botao_formatado.dart';
+import 'package:pmu_app_funcionalidade/pages/widgets_relatorio_feedback/titulo_input.dart';
 
 List<String> tipoFeedbackDrop = [
   'Selecione o tipo de feedback',
