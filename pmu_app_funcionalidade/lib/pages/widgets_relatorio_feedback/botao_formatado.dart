@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class BotaoFormatado extends StatelessWidget {
-  BotaoFormatado({Key key}) : super(key: key);
+  Function onTap;
+  BotaoFormatado(this.onTap, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: ElevatedButton.icon(
-        onPressed: () {},
+        onPressed: onTap,
         icon: const Icon(
           Icons.keyboard_arrow_right,
         ),
