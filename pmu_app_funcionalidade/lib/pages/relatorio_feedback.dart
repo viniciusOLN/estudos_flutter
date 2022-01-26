@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pmu_app_funcionalidade/pages/widgets_inicio/container_branco.dart';
 import 'package:pmu_app_funcionalidade/pages/widgets_relatorio_feedback/botao_formatado.dart';
+import 'package:pmu_app_funcionalidade/pages/widgets_relatorio_feedback/campo_texto_feedback.dart';
+import 'package:pmu_app_funcionalidade/pages/widgets_relatorio_feedback/dropdownbutton_feedback.dart';
 import 'package:pmu_app_funcionalidade/pages/widgets_relatorio_feedback/titulo_input.dart';
 
 List<String> tipoFeedbackDrop = [
@@ -20,8 +23,8 @@ List<String> localFeedbackDrop = [
   'Outro',
 ];
 
-final double BORDER_RADIUS = 2;
-final EdgeInsetsGeometry PADDING_FORM = EdgeInsets.only(bottom: 10);
+const double BORDER_RADIUS = 2;
+const EdgeInsetsGeometry PADDING_FORM = EdgeInsets.only(bottom: 10);
 
 String tipoFeedbackValue = 'Selecione o tipo de feedback';
 String localFeedbackValue = 'Selecione o local do feedback';
@@ -74,91 +77,38 @@ Future relatorioFeedback(context) {
           fontSize: 20,
           color: Color.fromRGBO(64, 64, 64, 1),
         ),
-        content: Container(
-          height: 300,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              TextoFormatado('Tipo de feedback'),
-              Padding(
-                padding: PADDING_FORM,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.blueGrey,
-                          width: 1,
-                          style: BorderStyle.solid),
-                      borderRadius: BorderRadius.circular(BORDER_RADIUS)),
-                  child: DropdownButtonFormField(
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                    ),
-                    value: tipoFeedbackValue,
-                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                    onChanged: (value) {},
-                    items: tipoFeedbackDrop
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: const TextStyle(color: Colors.black),
-                        ),
-                      );
-                    }).toList(),
-                  ),
+        content: Form(
+          child: Container(
+            height: 300,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                TextoFormatado('Tipo de feedback'),
+                DropDownButtonFeedback(
+                  PADDING_FORM,
+                  BORDER_RADIUS,
+                  tipoFeedbackValue,
+                  tipoFeedbackDrop,
                 ),
-              ),
-              TextoFormatado('Local do feedback'),
-              Padding(
-                padding: PADDING_FORM,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.blueGrey,
-                          width: 1,
-                          style: BorderStyle.solid),
-                      borderRadius: BorderRadius.circular(BORDER_RADIUS)),
-                  child: DropdownButtonFormField(
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                    ),
-                    value: localFeedbackValue,
-                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                    onChanged: (value) {},
-                    items: localFeedbackDrop
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: const TextStyle(color: Colors.black),
-                        ),
-                      );
-                    }).toList(),
-                  ),
+                TextoFormatado('Local do feedback'),
+                DropDownButtonFeedback(
+                  PADDING_FORM,
+                  BORDER_RADIUS,
+                  localFeedbackValue,
+                  localFeedbackDrop,
                 ),
-              ),
-              TextoFormatado('Descrição do feedback'),
-              TextField(
-                maxLines: 4,
-                decoration: InputDecoration(
-                  hintText:
-                      'Descreva o erro/melhoria ou comentário sobre o aplicativo.',
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 7, horizontal: 6),
-                  border: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.circular(BORDER_RADIUS))),
-                ),
-              ),
-            ],
+                TextoFormatado('Descrição do feedback'),
+                CampoTextoFeedback(BORDER_RADIUS, textoFeedback),
+              ],
+            ),
           ),
         ),
         actions: <Widget>[
-          BotaoFormatado(),
+          BotaoFormatado(() {
+            print(localFeedbackValue);
+            print(tipoFeedbackValue);
+            print(textoFeedback.text);
+          }),
         ],
       );
     },
