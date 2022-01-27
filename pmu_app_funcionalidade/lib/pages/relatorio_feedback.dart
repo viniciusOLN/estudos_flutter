@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pmu_app_funcionalidade/pages/utils_widgets/popup_notificacao.dart';
 import 'package:pmu_app_funcionalidade/pages/widgets_inicio/container_branco.dart';
 import 'package:pmu_app_funcionalidade/pages/widgets_relatorio_feedback/botao_formatado.dart';
 import 'package:pmu_app_funcionalidade/pages/widgets_relatorio_feedback/campo_texto_feedback.dart';
@@ -105,9 +106,23 @@ Future relatorioFeedback(context) {
         ),
         actions: <Widget>[
           BotaoFormatado(() {
-            print(localFeedbackValue);
-            print(tipoFeedbackValue);
-            print(textoFeedback.text);
+            if (textoFeedback.text.isEmpty) {
+              print('vazio irmao');
+              // showDialog(
+              //   context: context,
+              //   builder: (context) {
+              //     return
+              //   },
+              // );
+              showDialog<void>(
+                context: context,
+                builder: (context) {
+                  return PopupNotificacaoFormularioInvalida(
+                      'Erro ao enviar feedback! Por favor, preencha todos os campos.',
+                      context);
+                },
+              );
+            }
           }),
         ],
       );
