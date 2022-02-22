@@ -16,11 +16,16 @@ class _PaginaInicialState extends State<PaginaInicial> {
   List _tarefas = [];
   bool _checkbox = false;
 
-  _salvarArquivo(novaTarefa) async {
+  Future<File> _getFile() async {
     //pegando o caminho do diretório
     final diretorio = await getApplicationDocumentsDirectory();
     //criando um novo arquivo do tipo json
     var arquivo = File('${diretorio.path}/dados.json');
+    return arquivo;
+  }
+
+  _salvarArquivo(novaTarefa) async {
+    var arquivo = await _getFile();
 
     //criando o json aqui e passando o valor da tarefa
     Map<String, dynamic> tarefa = Map();
@@ -33,10 +38,35 @@ class _PaginaInicialState extends State<PaginaInicial> {
     String dados = json.encode(_tarefas);
     //escrevendo no arquivo dados.json o novo valor
     arquivo.writeAsString(dados);
+
+    setState(() {
+      _tarefas;
+    });
+  }
+
+  _lerArquivo() async {
+    try {
+      final arquivo = await _getFile();
+      return arquivo.readAsString();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _lerArquivo().then((data) {
+      setState(() {
+        _tarefas = json.decode(data);
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    print('itens: ' + _tarefas.toString());
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Lista de Tarefas"),
