@@ -63,6 +63,58 @@ class _PaginaInicialState extends State<PaginaInicial> {
     });
   }
 
+  Widget _criarItemLista(context, indice) {
+    final item = _tarefas[indice];
+
+    return Dismissible(
+      key: Key(item['titulo']),
+      onDismissed: (direction) {
+        if (direction == DismissDirection.endToStart) {
+          _tarefas.removeAt(indice);
+          _salvarArquivo();
+        }
+      },
+      background: Container(
+        color: Colors.green,
+        padding: EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Icon(
+              Icons.edit,
+              color: Colors.white,
+            ),
+          ],
+        ),
+      ),
+      secondaryBackground: Container(
+        color: Colors.red,
+        padding: EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Icon(
+              Icons.delete,
+              color: Colors.white,
+            ),
+          ],
+        ),
+      ),
+      child: CheckboxListTile(
+        title: Text(_tarefas[indice]["titulo"]),
+        secondary: Icon(Icons.keyboard_arrow_right),
+        selected: _tarefas[indice]["realizada"],
+        value: _tarefas[indice]["realizada"],
+        onChanged: (value) {
+          setState(() {
+            _tarefas[indice]["realizada"] = value;
+            _salvarArquivo();
+          });
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     print('itens: ' + _tarefas.toString());
@@ -74,24 +126,27 @@ class _PaginaInicialState extends State<PaginaInicial> {
       body: Column(
         children: <Widget>[
           Expanded(
-            child: ListView.separated(
-              itemBuilder: (context, indice) {
-                return CheckboxListTile(
-                  title: Text(_tarefas[indice]["titulo"]),
-                  secondary: Icon(Icons.keyboard_arrow_right),
-                  selected: _tarefas[indice]["realizada"],
-                  value: _tarefas[indice]["realizada"],
-                  onChanged: (value) {
-                    setState(() {
-                      _tarefas[indice]["realizada"] = value;
-                      _salvarArquivo();
-                    });
-                  },
-                );
-              },
-              separatorBuilder: (_, __) => Divider(),
-              itemCount: _tarefas.length,
-            ),
+            child: _tarefas.isEmpty
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: const Text(
+                            'Nenhuma tarefa adicionada.',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black54,
+                              fontSize: 18,
+                            ),
+                          )),
+                    ],
+                  )
+                : ListView.builder(
+                    itemCount: _tarefas.length,
+                    itemBuilder: _criarItemLista,
+                  ),
           ),
         ],
       ),
