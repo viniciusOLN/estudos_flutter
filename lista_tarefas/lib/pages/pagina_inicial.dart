@@ -24,24 +24,24 @@ class _PaginaInicialState extends State<PaginaInicial> {
     return arquivo;
   }
 
-  _salvarArquivo(novaTarefa) async {
-    var arquivo = await _getFile();
-
+  _salvarTarefa(novaTarefa) {
     //criando o json aqui e passando o valor da tarefa
     Map<String, dynamic> tarefa = Map();
-    tarefa["titulo"] = novaTarefa;
-    tarefa["realizada"] = false;
+    tarefa["titulo"] = novaTarefa["titulo"];
+    tarefa["realizada"] = novaTarefa["realizada"];
 
-    _tarefas.add(tarefa);
+    setState(() {
+      _tarefas.add(tarefa);
+    });
+    _salvarArquivo();
+  }
 
+  _salvarArquivo() async {
+    var arquivo = await _getFile();
     //passando o array de objetos para o valor json
     String dados = json.encode(_tarefas);
     //escrevendo no arquivo dados.json o novo valor
     arquivo.writeAsString(dados);
-
-    setState(() {
-      _tarefas;
-    });
   }
 
   _lerArquivo() async {
@@ -80,10 +80,11 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   title: Text(_tarefas[indice]["titulo"]),
                   secondary: Icon(Icons.keyboard_arrow_right),
                   selected: _tarefas[indice]["realizada"],
-                  value: _checkbox,
+                  value: _tarefas[indice]["realizada"],
                   onChanged: (value) {
                     setState(() {
-                      _checkbox = value;
+                      _tarefas[indice]["realizada"] = value;
+                      _salvarArquivo();
                     });
                   },
                 );
@@ -120,7 +121,11 @@ class _PaginaInicialState extends State<PaginaInicial> {
                 actions: <Widget>[
                   ElevatedButton(
                     onPressed: () {
-                      _salvarArquivo(_novaTarefa.text);
+                      Map<String, dynamic> novaTarefaMap = {
+                        "titulo": _novaTarefa.text,
+                        "realizada": false
+                      };
+                      _salvarTarefa(novaTarefaMap);
                       Navigator.pop(context);
                     },
                     child: Text('Salvar'),
