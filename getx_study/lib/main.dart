@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:getx_study/app/modules/home/home_binding.dart';
+import 'package:getx_study/app/modules/home/home_view.dart';
 import 'package:getx_study/app/routes/app_pages.dart';
 import 'package:getx_study/pagina_inicial.dart';
 import 'package:get/get.dart';
@@ -16,7 +18,6 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: PaginaInicial(),
       title: 'App teste GetX',
       theme: appThemeData,
       initialRoute: Routes.INITIAL,
