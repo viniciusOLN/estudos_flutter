@@ -3,6 +3,10 @@ import 'package:getx_study/app/modules/home/home_binding.dart';
 import 'package:getx_study/app/modules/home/home_view.dart';
 import 'package:getx_study/app/modules/initial/initial_binding.dart';
 import 'package:getx_study/app/modules/initial/initial_view.dart';
+import 'package:getx_study/app/modules/login/login_binding.dart';
+import 'package:getx_study/app/modules/login/login_view.dart';
+import 'package:getx_study/app/modules/signup/signup_view.dart';
+import 'package:getx_study/app/modules/welcome/welcome_view.dart';
 import 'package:getx_study/app/routes/app_routes.dart';
 
 /*
@@ -24,6 +28,19 @@ class AppPages {
       name: INITIAL,
       page: () => InitialPage(),
       binding: InitialBinding(),
+    ),
+    GetPage(
+      name: Routes.LOGIN,
+      page: () => LoginPage(),
+      binding: LoginBinding(),
+    ),
+    GetPage(
+      name: Routes.WELCOME,
+      page: () => WelcomePage(),
+    ),
+    GetPage(
+      name: Routes.SIGNUP,
+      page: () => SignUpPage(),
     ),
   ];
 }
