@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_study/app/modules/login/login_view.dart';
-import 'package:getx_study/app/modules/signup/signup_view.dart';
 import 'package:getx_study/app/modules/welcome/welcome_controller.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:getx_study/app/themes/app_theme.dart';
+import 'package:getx_study/app/utils/widgets/background.dart';
 import 'package:getx_study/app/utils/widgets/rounded_button.dart';
-import 'widgets/background_widget.dart';
 
 class WelcomePage extends GetView<WelcomeController> {
   const WelcomePage({Key key}) : super(key: key);
