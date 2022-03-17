@@ -6,6 +6,7 @@ import 'package:getx_study/app/modules/initial/initial_view.dart';
 import 'package:getx_study/app/modules/login/login_binding.dart';
 import 'package:getx_study/app/modules/login/login_view.dart';
 import 'package:getx_study/app/modules/signup/signup_view.dart';
+import 'package:getx_study/app/modules/welcome/welcome_binding.dart';
 import 'package:getx_study/app/modules/welcome/welcome_view.dart';
 import 'package:getx_study/app/routes/app_routes.dart';
 
@@ -37,6 +38,7 @@ class AppPages {
     GetPage(
       name: Routes.WELCOME,
       page: () => WelcomePage(),
+      binding: WelcomeBinding(),
     ),
     GetPage(
       name: Routes.SIGNUP,
