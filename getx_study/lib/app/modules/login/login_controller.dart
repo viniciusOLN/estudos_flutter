@@ -15,6 +15,9 @@ class LoginController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   bool showPassword = false;
   bool loadingLogin = false;
+  bool usernameEmpty = false;
+  bool passwordEmpty = false;
+  String textFieldEmpty = "Campo vazio!";
   AuthRepository repository = Get.find();
   Auth user;
 
@@ -29,8 +32,31 @@ class LoginController extends GetxController {
     return null;
   }
 
+  bool usernameFieldEmpty() {
+    usernameEmpty = true;
+    update(['inputUsername']);
+    return null;
+  }
+
+  bool passwordFieldEmpty() {
+    passwordEmpty = true;
+    update(['inputPassword']);
+    return null;
+  }
+
   login() async {
-    if (formLoginKey.currentState.validate()) {
+    if (usernameController.text.isEmpty && passwordController.text.isNotEmpty) {
+      usernameFieldEmpty();
+      return null;
+    }
+
+    if (usernameController.text.isNotEmpty && passwordController.text.isEmpty) {
+      passwordFieldEmpty();
+      return null;
+    }
+
+    if (usernameController.text.isNotEmpty &&
+        passwordController.text.isNotEmpty) {
       loadLogin();
       print('aqui vai todo o login');
       await repository
@@ -44,6 +70,10 @@ class LoginController extends GetxController {
       Future.delayed(const Duration(milliseconds: 1000), () {
         loadLogin();
       });
+    } else {
+      usernameFieldEmpty();
+      passwordFieldEmpty();
+      return null;
     }
   }
 }
