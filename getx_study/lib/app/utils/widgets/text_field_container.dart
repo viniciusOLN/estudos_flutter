@@ -25,6 +25,11 @@ class TextFieldContainer extends StatelessWidget {
           decoration: BoxDecoration(
             color: Get.theme.highlightColor,
             borderRadius: BorderRadius.circular(29),
+            border: !error
+                ? Border.all(color: Colors.transparent, width: 0)
+                : Border.all(
+                    color: Get.theme.errorColor,
+                  ),
           ),
           child: child,
         ),
