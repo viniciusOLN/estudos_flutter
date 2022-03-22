@@ -22,7 +22,7 @@ class RoundedInputField extends StatelessWidget {
       child: TextFormField(
         validator: (value) {
           if (value.isEmpty) {
-            return 'Campo requerido.';
+            return 'Campo vazio!';
           }
           return null;
         },
