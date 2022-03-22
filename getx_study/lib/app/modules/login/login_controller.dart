@@ -78,7 +78,7 @@ class LoginController extends GetxController {
     return false;
   }
 
-  login() async {
+  void login() async {
     if (validateForm()) {
       loadLogin();
       print('aqui vai todo o login');
