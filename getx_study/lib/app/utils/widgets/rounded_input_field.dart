@@ -7,18 +7,24 @@ class RoundedInputField extends StatelessWidget {
   final IconData icon;
   final ValueChanged<String> onChanged;
   final controller;
+  bool error;
+  final String errorMessage;
 
-  const RoundedInputField({
+  RoundedInputField({
     Key key,
     this.hintText,
     this.icon = Icons.person,
     this.onChanged,
     this.controller,
+    this.error,
+    this.errorMessage,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
+      error: error,
+      errorMessage: errorMessage,
       child: TextFormField(
         validator: (value) {
           if (value.isEmpty) {
