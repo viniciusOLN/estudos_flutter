@@ -22,7 +22,7 @@ class RoundedPasswordField extends StatelessWidget {
       child: TextFormField(
         validator: (value) {
           if (value.isEmpty) {
-            return 'Campo requerido.';
+            return 'Campo vazio!';
           }
           if (value.length <= 4) {
             return 'Campo requer mínimo 5 caracteres.';
