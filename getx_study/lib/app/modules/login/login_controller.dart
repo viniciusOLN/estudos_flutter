@@ -44,19 +44,42 @@ class LoginController extends GetxController {
     return null;
   }
 
-  login() async {
-    if (usernameController.text.isEmpty && passwordController.text.isNotEmpty) {
-      usernameFieldEmpty();
-      return null;
-    }
+  bool usernameFieldNotEmpty() {
+    usernameEmpty = false;
+    update(['inputUsername']);
+    return null;
+  }
 
-    if (usernameController.text.isNotEmpty && passwordController.text.isEmpty) {
-      passwordFieldEmpty();
-      return null;
-    }
+  bool passwordFieldNotEmpty() {
+    passwordEmpty = false;
+    update(['inputPassword']);
+    return null;
+  }
 
+  bool validateForm() {
     if (usernameController.text.isNotEmpty &&
         passwordController.text.isNotEmpty) {
+      usernameFieldNotEmpty();
+      passwordFieldNotEmpty();
+      return true;
+    }
+    if (usernameController.text.isEmpty && passwordController.text.isNotEmpty) {
+      usernameFieldEmpty();
+      passwordFieldNotEmpty();
+    }
+    if (usernameController.text.isNotEmpty && passwordController.text.isEmpty) {
+      usernameFieldNotEmpty();
+      passwordFieldEmpty();
+    }
+    if (usernameController.text.isEmpty && passwordController.text.isEmpty) {
+      usernameFieldEmpty();
+      passwordFieldEmpty();
+    }
+    return false;
+  }
+
+  login() async {
+    if (validateForm()) {
       loadLogin();
       print('aqui vai todo o login');
       await repository
@@ -70,10 +93,6 @@ class LoginController extends GetxController {
       Future.delayed(const Duration(milliseconds: 1000), () {
         loadLogin();
       });
-    } else {
-      usernameFieldEmpty();
-      passwordFieldEmpty();
-      return null;
     }
   }
 }
