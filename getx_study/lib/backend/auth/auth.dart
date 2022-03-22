@@ -15,7 +15,7 @@ class AuthAPI {
           userUsername != username && userPassword == password) {
         throw 401;
       }
-      return throw 404;
+      throw 404;
     }
   }
 
