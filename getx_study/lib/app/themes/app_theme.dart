@@ -8,6 +8,7 @@ final ThemeData appThemeData = ThemeData(
   appBarTheme: AppBarTheme(
     color: Colors.cyan,
   ),
+  errorColor: Colors.red,
 );
 
 final Color SplashScreenInitialColor = Color.fromRGBO(138, 173, 243, 1);
