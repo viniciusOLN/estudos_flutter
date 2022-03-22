@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MessageErrorInput extends StatelessWidget {
   final String errorMessage;
@@ -16,8 +17,8 @@ class MessageErrorInput extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: Text(
           errorMessage,
-          style: const TextStyle(
-            color: Colors.red,
+          style: TextStyle(
+            color: Get.theme.errorColor,
           ),
           textAlign: TextAlign.left,
         ),
