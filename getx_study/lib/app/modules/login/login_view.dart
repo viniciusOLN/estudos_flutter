@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:getx_study/app/modules/login/login_controller.dart';
 import 'package:getx_study/app/utils/widgets/alredy_have_account.dart';
 import 'package:getx_study/app/utils/widgets/background.dart';
@@ -42,16 +43,25 @@ class LoginPage extends GetView<LoginController> {
                   height: Get.height * 0.35,
                 ),
                 SizedBox(height: Get.height * 0.03),
-                RoundedInputField(
-                  hintText: 'Usuário',
-                  controller: controller.usernameController,
-                  onChanged: (value) {},
+                GetBuilder<LoginController>(
+                  id: 'inputUsername',
+                  builder: (_) {
+                    return RoundedInputField(
+                      hintText: 'Usuário',
+                      controller: controller.usernameController,
+                      onChanged: (value) {},
+                      error: _.usernameEmpty,
+                      errorMessage: _.textFieldEmpty,
+                    );
+                  },
                 ),
                 SizedBox(height: Get.height * 0.01),
                 GetBuilder<LoginController>(
                   id: 'inputPassword',
                   builder: (_) {
                     return RoundedPasswordField(
+                      error: _.passwordEmpty,
+                      errorMesage: _.textFieldEmpty,
                       controller: _.passwordController,
                       showPassword: _.showPassword,
                       changeShowPassword: () =>
