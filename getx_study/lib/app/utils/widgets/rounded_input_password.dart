@@ -8,17 +8,23 @@ class RoundedPasswordField extends StatelessWidget {
   final controller;
   bool showPassword;
   Function changeShowPassword;
+  bool error = false;
+  String errorMesage;
   RoundedPasswordField({
     Key key,
     this.controller,
     this.onChanged,
     this.showPassword = false,
     this.changeShowPassword,
+    this.error,
+    this.errorMesage,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
+      error: error,
+      errorMessage: errorMesage,
       child: TextFormField(
         validator: (value) {
           if (value.isEmpty) {
