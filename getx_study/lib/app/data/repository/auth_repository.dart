@@ -11,7 +11,6 @@ class AuthRepository {
   final AuthApiClient apiClient = AuthApiClient();
 
   Future<Auth> login(String username, String password) async {
-    Map<String, dynamic> json = await apiClient.login(username, password);
-    return json != null ? Auth.fromJson(json) : null;
+    return Auth.fromJson(await apiClient.login(username, password));
   }
 }
