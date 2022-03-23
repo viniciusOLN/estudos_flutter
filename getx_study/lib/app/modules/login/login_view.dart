@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:getx_study/app/modules/login/login_controller.dart';
 import 'package:getx_study/app/utils/widgets/alredy_have_account.dart';
+import 'package:getx_study/app/utils/widgets/appbar_return_page.dart';
 import 'package:getx_study/app/utils/widgets/background.dart';
 import 'package:getx_study/app/utils/widgets/loading.dart';
 import 'package:getx_study/app/utils/widgets/rounded_button.dart';
@@ -14,23 +15,11 @@ class LoginPage extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: Get.theme.hintColor,
-        ),
-        title: Text(
-          'Voltar',
-          style: TextStyle(
-            color: Get.theme.hintColor,
-          ),
-        ),
-      ),
+      appBar: AppbarReturnPage.AppbarReturn,
       body: Background(
         child: SingleChildScrollView(
           child: Form(
-            key: controller.formLoginKey,
+            //key: controller.formLoginKey,
             child: Column(
               children: <Widget>[
                 const Text(
@@ -67,19 +56,15 @@ class LoginPage extends GetView<LoginController> {
                       changeShowPassword: () =>
                           _.showPassword = _.statePassword(),
                       onChanged: (value) {},
+                      hintText: "Senha",
                     );
                   },
                 ),
                 GetBuilder<LoginController>(
-                  id: 'loadingLogin',
-                  builder: (_) {
-                    if (!_.loadingLogin) {
-                      return RoundedButton(
-                          text: "ENTRAR", press: () => _.login());
-                    }
-                    return const LoadingButton();
-                  },
-                ),
+                    id: 'loadingLogin',
+                    builder: (_) {
+                      return _.verifyLoginWidget();
+                    }),
                 SizedBox(height: Get.height * 0.10),
                 AlreadyHaveAnAccountCheck(
                   press: () => Get.toNamed('/signup'),
