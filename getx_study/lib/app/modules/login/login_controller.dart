@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:getx_study/app/data/model/auth_model.dart';
 import 'package:getx_study/app/data/repository/auth_repository.dart';
+import 'package:getx_study/app/utils/widgets/loading.dart';
+import 'package:getx_study/app/utils/widgets/rounded_button.dart';
 
 /* 
   O controller é a classe responsável por controlar todo o estado da view dele.
@@ -10,14 +12,14 @@ import 'package:getx_study/app/data/repository/auth_repository.dart';
 */
 
 class LoginController extends GetxController {
-  final formLoginKey = GlobalKey<FormState>();
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
   bool showPassword = false;
   bool loadingLogin = false;
   bool usernameEmpty = false;
   bool passwordEmpty = false;
   String textFieldEmpty = "Campo vazio!";
+  GlobalKey<FormState> formLoginKey = GlobalKey<FormState>();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   AuthRepository repository = Get.find();
   Auth user;
 
@@ -76,6 +78,13 @@ class LoginController extends GetxController {
       passwordFieldEmpty();
     }
     return false;
+  }
+
+  Widget verifyLoginWidget() {
+    if (!loadingLogin) {
+      return RoundedButton(text: "ENTRAR", press: () => login());
+    }
+    return const LoadingButton();
   }
 
   void login() async {
