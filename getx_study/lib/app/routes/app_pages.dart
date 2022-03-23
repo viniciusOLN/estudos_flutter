@@ -5,6 +5,7 @@ import 'package:getx_study/app/modules/initial/initial_binding.dart';
 import 'package:getx_study/app/modules/initial/initial_view.dart';
 import 'package:getx_study/app/modules/login/login_binding.dart';
 import 'package:getx_study/app/modules/login/login_view.dart';
+import 'package:getx_study/app/modules/signup/signup_binding.dart';
 import 'package:getx_study/app/modules/signup/signup_view.dart';
 import 'package:getx_study/app/modules/welcome/welcome_binding.dart';
 import 'package:getx_study/app/modules/welcome/welcome_view.dart';
@@ -43,6 +44,7 @@ class AppPages {
     GetPage(
       name: Routes.SIGNUP,
       page: () => SignUpPage(),
+      binding: SignUpBinding(),
     ),
   ];
 }
