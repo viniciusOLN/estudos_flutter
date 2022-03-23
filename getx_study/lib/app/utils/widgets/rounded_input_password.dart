@@ -10,6 +10,7 @@ class RoundedPasswordField extends StatelessWidget {
   Function changeShowPassword;
   bool error = false;
   String errorMesage;
+  String hintText;
   RoundedPasswordField({
     Key key,
     this.controller,
@@ -18,6 +19,7 @@ class RoundedPasswordField extends StatelessWidget {
     this.changeShowPassword,
     this.error,
     this.errorMesage,
+    this.hintText,
   }) : super(key: key);
 
   @override
@@ -40,7 +42,7 @@ class RoundedPasswordField extends StatelessWidget {
         onChanged: onChanged,
         cursorColor: Get.theme.primaryColor,
         decoration: InputDecoration(
-          hintText: "Senha",
+          hintText: this.hintText,
           icon: Icon(
             Icons.lock,
             color: Get.theme.hintColor,
