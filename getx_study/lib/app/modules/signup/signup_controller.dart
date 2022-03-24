@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_study/app/utils/validator_form.dart';
 import 'package:getx_study/app/utils/widgets/loading.dart';
 import 'package:getx_study/app/utils/widgets/rounded_button.dart';
 
@@ -15,21 +16,40 @@ class SignUpController extends GetxController {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  ValidatorForm validate;
 
   bool statePassword() {
     update(['inputPassword']);
-    return !showPassword;
+    showPassword = !showPassword;
   }
 
   bool stateConfirmPassword() {
     update(['inputConfirmPassword']);
-    return !showConfirmPassword;
+    showConfirmPassword = !showConfirmPassword;
   }
 
-  bool loadRegister() {
+  void loadRegister() {
     update(['loadingButton']);
     loadingRegister = !loadingRegister;
-    return null;
+  }
+
+  bool validateForm() {
+    validate = ValidatorForm(
+      listControllersFields: {
+        'username': usernameController,
+        'password': passwordController,
+        'confirmPassword': confirmPasswordController,
+      },
+    );
+
+    Map<String, bool> formValidated = validate.validateForm();
+    usernameEmpty = formValidated['username'];
+    passwordEmpty = formValidated['password'];
+    confirmPasswordEmpty = formValidated['confirmPassword'];
+
+    update(['inputUsername', 'inputPassword', 'inputConfirmPassword']);
+
+    return validate.resultValidationForm(formValidated);
   }
 
   Widget verifyRegisterWidget() {
@@ -40,9 +60,11 @@ class SignUpController extends GetxController {
   }
 
   void register() async {
-    loadRegister();
-    Future.delayed(const Duration(milliseconds: 1000), () {
+    if (validateForm()) {
       loadRegister();
-    });
+      Future.delayed(const Duration(milliseconds: 1000), () {
+        loadRegister();
+      });
+    }
   }
 }
