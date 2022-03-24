@@ -52,8 +52,7 @@ class SignUpPage extends GetView<SignUpController> {
                       errorMesage: _.errorMessageInputEmpty,
                       controller: _.passwordController,
                       showPassword: _.showPassword,
-                      changeShowPassword: () =>
-                          _.showPassword = _.statePassword(),
+                      changeShowPassword: () => _.statePassword(),
                       hintText: "Senha",
                       onChanged: (e) {},
                     );
@@ -67,8 +66,7 @@ class SignUpPage extends GetView<SignUpController> {
                       errorMesage: _.errorMessageInputEmpty,
                       controller: _.confirmPasswordController,
                       showPassword: _.showConfirmPassword,
-                      changeShowPassword: () =>
-                          _.showConfirmPassword = _.stateConfirmPassword(),
+                      changeShowPassword: () => _.stateConfirmPassword(),
                       hintText: "Confirmar senha",
                       onChanged: (e) {},
                     );
