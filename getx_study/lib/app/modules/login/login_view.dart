@@ -53,8 +53,7 @@ class LoginPage extends GetView<LoginController> {
                       errorMesage: _.textFieldEmpty,
                       controller: _.passwordController,
                       showPassword: _.showPassword,
-                      changeShowPassword: () =>
-                          _.showPassword = _.statePassword(),
+                      changeShowPassword: () => _.statePassword(),
                       onChanged: (value) {},
                       hintText: "Senha",
                     );
