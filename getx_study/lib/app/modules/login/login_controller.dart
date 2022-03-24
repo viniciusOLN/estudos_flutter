@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:getx_study/app/data/model/auth_model.dart';
 import 'package:getx_study/app/data/repository/auth_repository.dart';
+import 'package:getx_study/app/utils/validator_form.dart';
 import 'package:getx_study/app/utils/widgets/loading.dart';
 import 'package:getx_study/app/utils/widgets/rounded_button.dart';
 
@@ -20,12 +21,14 @@ class LoginController extends GetxController {
   GlobalKey<FormState> formLoginKey = GlobalKey<FormState>();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  ValidatorForm validate;
   AuthRepository repository = Get.find();
   Auth user;
 
   bool statePassword() {
     update(['inputPassword']);
-    return !showPassword;
+    showPassword = !showPassword;
+    return null;
   }
 
   bool loadLogin() {
@@ -34,50 +37,20 @@ class LoginController extends GetxController {
     return null;
   }
 
-  bool usernameFieldEmpty() {
-    usernameEmpty = true;
-    update(['inputUsername']);
-    return null;
-  }
-
-  bool passwordFieldEmpty() {
-    passwordEmpty = true;
-    update(['inputPassword']);
-    return null;
-  }
-
-  bool usernameFieldNotEmpty() {
-    usernameEmpty = false;
-    update(['inputUsername']);
-    return null;
-  }
-
-  bool passwordFieldNotEmpty() {
-    passwordEmpty = false;
-    update(['inputPassword']);
-    return null;
-  }
-
   bool validateForm() {
-    if (usernameController.text.isNotEmpty &&
-        passwordController.text.isNotEmpty) {
-      usernameFieldNotEmpty();
-      passwordFieldNotEmpty();
-      return true;
-    }
-    if (usernameController.text.isEmpty && passwordController.text.isNotEmpty) {
-      usernameFieldEmpty();
-      passwordFieldNotEmpty();
-    }
-    if (usernameController.text.isNotEmpty && passwordController.text.isEmpty) {
-      usernameFieldNotEmpty();
-      passwordFieldEmpty();
-    }
-    if (usernameController.text.isEmpty && passwordController.text.isEmpty) {
-      usernameFieldEmpty();
-      passwordFieldEmpty();
-    }
-    return false;
+    validate = ValidatorForm(
+      listControllersFields: {
+        'username': usernameController,
+        'password': passwordController,
+      },
+    );
+
+    Map<String, bool> teste = validate.validateForm();
+    usernameEmpty = teste['username'];
+    passwordEmpty = teste['password'];
+    update(['inputUsername', 'inputPassword']);
+
+    return teste.values.contains(true) ? false : true;
   }
 
   Widget verifyLoginWidget() {
