@@ -25,16 +25,14 @@ class LoginController extends GetxController {
   AuthRepository repository = Get.find();
   Auth user;
 
-  bool statePassword() {
+  void statePassword() {
     update(['inputPassword']);
     showPassword = !showPassword;
-    return null;
   }
 
-  bool loadLogin() {
+  void loadLogin() {
     update(['loadingLogin']);
     loadingLogin = !loadingLogin;
-    return null;
   }
 
   bool validateForm() {
@@ -45,12 +43,14 @@ class LoginController extends GetxController {
       },
     );
 
-    Map<String, bool> teste = validate.validateForm();
-    usernameEmpty = teste['username'];
-    passwordEmpty = teste['password'];
+    Map<String, bool> formValidated = validate.validateForm();
+
+    usernameEmpty = formValidated['username'];
+    passwordEmpty = formValidated['password'];
+
     update(['inputUsername', 'inputPassword']);
 
-    return teste.values.contains(true) ? false : true;
+    return validate.resultValidationForm(formValidated);
   }
 
   Widget verifyLoginWidget() {
