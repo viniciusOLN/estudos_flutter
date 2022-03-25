@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:getx_study/app/routes/app_routes.dart';
 
 /* 
   O controller é a classe responsável por controlar todo o estado da view dele.
@@ -7,9 +9,10 @@ import 'package:get/get.dart';
 */
 
 class InitialController extends GetxController {
-  var nome = "Oi".obs;
+  final box = GetStorage(Routes.STORAGEGET);
 
-  atualizar() {
-    nome.value = "ixi";
+  String autenticateAuth() {
+    Map auth = box.read('authUser');
+    return auth == null ? Routes.WELCOME : Routes.HOMEPAGE;
   }
 }
