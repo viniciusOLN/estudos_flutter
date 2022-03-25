@@ -63,7 +63,7 @@ class SignUpPage extends GetView<SignUpController> {
                   builder: (_) {
                     return RoundedPasswordField(
                       error: _.confirmPasswordEmpty,
-                      errorMesage: _.errorMessageInputEmpty,
+                      errorMesage: _.errorMessageConfirmPasswordEmpty,
                       controller: _.confirmPasswordController,
                       showPassword: _.showConfirmPassword,
                       changeShowPassword: () => _.stateConfirmPassword(),
