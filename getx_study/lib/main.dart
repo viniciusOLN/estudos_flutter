@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:getx_study/app/modules/home/home_binding.dart';
 import 'package:getx_study/app/modules/home/home_view.dart';
 import 'package:getx_study/app/routes/app_pages.dart';
@@ -7,7 +8,8 @@ import 'package:get/get.dart';
 import 'app/routes/app_routes.dart';
 import 'app/themes/app_theme.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init(Routes.STORAGEGET);
   runApp(MainApp());
 }
 
