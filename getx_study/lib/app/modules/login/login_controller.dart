@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:getx_study/app/data/model/auth_model.dart';
 import 'package:getx_study/app/data/repository/auth_repository.dart';
+import 'package:getx_study/app/routes/app_routes.dart';
 import 'package:getx_study/app/utils/validator_form.dart';
 import 'package:getx_study/app/utils/widgets/loading.dart';
 import 'package:getx_study/app/utils/widgets/rounded_button.dart';
@@ -24,6 +26,7 @@ class LoginController extends GetxController {
   ValidatorForm validate;
   AuthRepository repository = Get.find();
   Auth user;
+  final box = GetStorage(Routes.STORAGEGET);
 
   void statePassword() {
     update(['inputPassword']);
@@ -66,7 +69,12 @@ class LoginController extends GetxController {
     print('aqui vai todo o login');
     await repository
         .login(usernameController.text, passwordController.text)
-        .then((value) => print('deu certo ó'))
+        .then(
+          (user) => {
+            box.write('authUser', user),
+            Get.offAllNamed('/home'),
+          },
+        )
         .catchError((e) {
       print(e);
     });
