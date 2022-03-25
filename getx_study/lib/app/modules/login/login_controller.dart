@@ -38,14 +38,17 @@ class LoginController extends GetxController {
     loadingLogin = !loadingLogin;
   }
 
-  bool validateForm() {
+  void loadControllers() {
     validate = ValidatorForm(
       listControllersFields: {
         'username': usernameController,
         'password': passwordController,
       },
     );
+  }
 
+  bool validateForm() {
+    loadControllers();
     Map<String, bool> formValidated = validate.validateForm();
 
     usernameEmpty = formValidated['username'];
