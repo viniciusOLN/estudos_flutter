@@ -10,6 +10,6 @@ import 'package:getx_study/app/modules/initial/initial_controller.dart';
 class InitialBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => InitialController());
+    Get.put(InitialController());
   }
 }
