@@ -1,6 +1,8 @@
 /*Classe Abstrata que carrega o nome das views */
 
 abstract class Routes {
+  static const STORAGEGET = 'barberapp';
+
   static const INITIAL = '/';
   static const HOMEPAGE = '/home';
   static const LOGIN = '/login';
