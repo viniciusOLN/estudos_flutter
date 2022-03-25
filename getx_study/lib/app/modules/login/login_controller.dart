@@ -55,26 +55,25 @@ class LoginController extends GetxController {
 
   Widget verifyLoginWidget() {
     if (!loadingLogin) {
-      return RoundedButton(text: "ENTRAR", press: () => login());
+      return RoundedButton(
+          text: "ENTRAR", press: () => validateForm() ? login() : null);
     }
     return const LoadingButton();
   }
 
   void login() async {
-    if (validateForm()) {
+    loadLogin();
+    print('aqui vai todo o login');
+    await repository
+        .login(usernameController.text, passwordController.text)
+        .then((value) => print('deu certo ó'))
+        .catchError((e) {
+      print(e);
+    });
+    // //using future just to test the change of 'loadingLogin' variable,
+    //after using the async functions, this part will be removed.
+    Future.delayed(const Duration(milliseconds: 1000), () {
       loadLogin();
-      print('aqui vai todo o login');
-      await repository
-          .login(usernameController.text, passwordController.text)
-          .then((value) => print('deu certo ó'))
-          .catchError((e) {
-        print(e);
-      });
-      // //using future just to test the change of 'loadingLogin' variable,
-      //after using the async functions, this part will be removed.
-      Future.delayed(const Duration(milliseconds: 1000), () {
-        loadLogin();
-      });
-    }
+    });
   }
 }

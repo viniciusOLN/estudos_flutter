@@ -54,17 +54,16 @@ class SignUpController extends GetxController {
 
   Widget verifyRegisterWidget() {
     if (!loadingRegister) {
-      return RoundedButton(text: "Cadastrar", press: () => register());
+      return RoundedButton(
+          text: "Cadastrar", press: () => validateForm() ? register() : null);
     }
     return const LoadingButton();
   }
 
   void register() async {
-    if (validateForm()) {
+    loadRegister();
+    Future.delayed(const Duration(milliseconds: 1000), () {
       loadRegister();
-      Future.delayed(const Duration(milliseconds: 1000), () {
-        loadRegister();
-      });
-    }
+    });
   }
 }
