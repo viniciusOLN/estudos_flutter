@@ -49,7 +49,7 @@ class SignUpController extends GetxController {
 
     update(['inputUsername', 'inputPassword', 'inputConfirmPassword']);
 
-    return validate.resultValidationForm(formValidated);
+    return formValidated.values.contains(true) ? false : true;
   }
 
   Widget verifyRegisterWidget() {

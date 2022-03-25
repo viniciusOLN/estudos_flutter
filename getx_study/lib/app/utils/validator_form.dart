@@ -1,7 +1,6 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-class ValidatorForm extends GetxController {
+class ValidatorForm {
   Map<String, TextEditingController> listControllersFields;
 
   ValidatorForm({
@@ -22,9 +21,5 @@ class ValidatorForm extends GetxController {
       }
     }
     return result;
-  }
-
-  bool resultValidationForm(Map valuesFromTextField) {
-    return !valuesFromTextField.values.contains(true) ? true : false;
   }
 }

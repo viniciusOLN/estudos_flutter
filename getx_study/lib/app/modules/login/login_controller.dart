@@ -50,7 +50,7 @@ class LoginController extends GetxController {
 
     update(['inputUsername', 'inputPassword']);
 
-    return validate.resultValidationForm(formValidated);
+    return formValidated.values.contains(true) ? false : true;
   }
 
   Widget verifyLoginWidget() {
