@@ -11,7 +11,7 @@ class HomePage extends GetView<HomeController> {
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
-          onPressed: controller.increment,
+          onPressed: controller.clearStorageLogin,
         ),
       );
 }
