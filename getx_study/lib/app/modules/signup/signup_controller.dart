@@ -13,7 +13,7 @@ class SignUpController extends GetxController {
   bool confirmPasswordEmpty = false;
   bool loadingRegister = false;
   String errorMessageInputEmpty = "Campo vazio!";
-  String errorMessageConfirmPasswordEmpty;
+  String errorMessageConfirmPasswordEmpty = "Campo vazio!";
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
@@ -29,7 +29,7 @@ class SignUpController extends GetxController {
     showConfirmPassword = !showConfirmPassword;
   }
 
-  void loadRegister() {
+  void stateLoadingButtonRegister() {
     update(['loadingButton']);
     loadingRegister = !loadingRegister;
   }
@@ -37,15 +37,15 @@ class SignUpController extends GetxController {
   bool passwordAndConfirmPasswordDiferent() {
     String password = passwordController.text.trim();
     String confirmPassword = confirmPasswordController.text.trim();
-    if (!passwordEmpty &&
-        !confirmPasswordEmpty &&
-        password != confirmPassword) {
+    if (password != confirmPassword &&
+        password.isNotEmpty &&
+        confirmPassword.isNotEmpty) {
       return true;
     }
     return false;
   }
 
-  bool validateForm() {
+  void loadControllers() {
     validate = ValidatorForm(
       listControllersFields: {
         'username': usernameController,
@@ -53,13 +53,17 @@ class SignUpController extends GetxController {
         'confirmPassword': confirmPasswordController,
       },
     );
+  }
 
+  bool validateForm() {
+    loadControllers();
     Map<String, bool> formValidated = validate.validateForm();
+
     usernameEmpty = formValidated['username'];
     passwordEmpty = formValidated['password'];
 
     if (passwordAndConfirmPasswordDiferent()) {
-      errorMessageConfirmPasswordEmpty = "Senha incorreta/diferete.";
+      errorMessageConfirmPasswordEmpty = "Senha incorreta/diferente.";
       confirmPasswordEmpty = true;
       formValidated['confirmPassword'] = true;
     } else {
@@ -81,9 +85,9 @@ class SignUpController extends GetxController {
   }
 
   void register() async {
-    loadRegister();
+    stateLoadingButtonRegister();
     Future.delayed(const Duration(milliseconds: 1000), () {
-      loadRegister();
+      stateLoadingButtonRegister();
     });
   }
 }
