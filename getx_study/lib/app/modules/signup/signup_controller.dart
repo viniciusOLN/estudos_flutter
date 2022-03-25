@@ -13,17 +13,18 @@ class SignUpController extends GetxController {
   bool confirmPasswordEmpty = false;
   bool loadingRegister = false;
   String errorMessageInputEmpty = "Campo vazio!";
+  String errorMessageConfirmPasswordEmpty;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   ValidatorForm validate;
 
-  bool statePassword() {
+  void statePassword() {
     update(['inputPassword']);
     showPassword = !showPassword;
   }
 
-  bool stateConfirmPassword() {
+  void stateConfirmPassword() {
     update(['inputConfirmPassword']);
     showConfirmPassword = !showConfirmPassword;
   }
@@ -31,6 +32,17 @@ class SignUpController extends GetxController {
   void loadRegister() {
     update(['loadingButton']);
     loadingRegister = !loadingRegister;
+  }
+
+  bool passwordAndConfirmPasswordDiferent() {
+    String password = passwordController.text.trim();
+    String confirmPassword = confirmPasswordController.text.trim();
+    if (!passwordEmpty &&
+        !confirmPasswordEmpty &&
+        password != confirmPassword) {
+      return true;
+    }
+    return false;
   }
 
   bool validateForm() {
@@ -45,7 +57,15 @@ class SignUpController extends GetxController {
     Map<String, bool> formValidated = validate.validateForm();
     usernameEmpty = formValidated['username'];
     passwordEmpty = formValidated['password'];
-    confirmPasswordEmpty = formValidated['confirmPassword'];
+
+    if (passwordAndConfirmPasswordDiferent()) {
+      errorMessageConfirmPasswordEmpty = "Senha incorreta/diferete.";
+      confirmPasswordEmpty = true;
+      formValidated['confirmPassword'] = true;
+    } else {
+      errorMessageConfirmPasswordEmpty = "Campo vazio!";
+      confirmPasswordEmpty = formValidated['confirmPassword'];
+    }
 
     update(['inputUsername', 'inputPassword', 'inputConfirmPassword']);
 
