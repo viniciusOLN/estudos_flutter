@@ -72,7 +72,6 @@ class LoginController extends GetxController {
     loadLogin();
     print('aqui vai todo o login');
     List<Map<String, dynamic>> arrayUsers = FakeData.responseApiLoginUser;
-    print(arrayUsers);
     await repository
         .login(usernameController.text, passwordController.text)
         .then(
