@@ -1,5 +1,4 @@
-import 'package:http/http.dart';
-import '../../../backend/auth/auth.dart';
+import 'package:getx_study/backend/auth/auth.dart';
 
 /*
   O provider é a classe responsável por acessar os dados da api, nele se trata
