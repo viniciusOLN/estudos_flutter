@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_study/app/data/model/user_model.dart';
+import 'package:getx_study/app/data/repository/register_repository.dart';
 import 'package:getx_study/app/utils/validator_form.dart';
 import 'package:getx_study/app/utils/widgets/loading.dart';
 import 'package:getx_study/app/utils/widgets/rounded_button.dart';
@@ -18,6 +20,7 @@ class SignUpController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   ValidatorForm validate;
+  RegisterRepository repository = Get.find();
 
   void statePassword() {
     update(['inputPassword']);
@@ -86,6 +89,15 @@ class SignUpController extends GetxController {
 
   void register() async {
     stateLoadingButtonRegister();
+    //passar um user e nao auth no provider, no repository e acho q na api tbm
+    User newUserData = User(
+        username: usernameController.text.trim(),
+        password: passwordController.text.trim());
+    await repository
+        .register(newUserData)
+        .then((value) => print(value))
+        .onError((error, stackTrace) => print(error));
+
     Future.delayed(const Duration(milliseconds: 1000), () {
       stateLoadingButtonRegister();
     });
