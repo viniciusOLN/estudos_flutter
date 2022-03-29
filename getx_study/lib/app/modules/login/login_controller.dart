@@ -20,7 +20,7 @@ class LoginController extends GetxController {
   bool loadingLogin = false;
   bool usernameEmpty = false;
   bool passwordEmpty = false;
-  String textFieldEmpty = "Campo vazio!";
+  String textFieldEmpty;
   GlobalKey<FormState> formLoginKey = GlobalKey<FormState>();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -49,6 +49,7 @@ class LoginController extends GetxController {
   }
 
   bool validateForm() {
+    textFieldEmpty = "Campo vazio!";
     loadControllers();
     Map<String, bool> formValidated = validate.validateForm();
 
@@ -80,8 +81,13 @@ class LoginController extends GetxController {
             Get.offAllNamed('/home'),
           },
         )
-        .catchError((e) {
-      print(e);
+        .catchError((error) {
+      if (error == 404) {
+        usernameEmpty = true;
+        textFieldEmpty = "Usuário não cadastrado";
+        update(['inputUsername']);
+      }
+      print(error);
     });
     // //using future just to test the change of 'loadingLogin' variable,
     //after using the async functions, this part will be removed.
