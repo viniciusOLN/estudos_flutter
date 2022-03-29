@@ -8,15 +8,25 @@ class RegisterAPI {
   static const LOGIN_EXPIRES_IN = 3600;
   static const TOKEN_TYPE = 'bearer';
 
-  Future<bool> validateRegister(User data) async {
+  Future<bool> validateRegister(User data, List<Map> arrayUsers) async {
     AuthAPI validateUser = AuthAPI();
     bool result;
     await validateUser
         .verifyUser(data.username, data.password)
         .then((value) => {result = false})
         .catchError((error) {
-      print(error);
-      result = (error == 401 || error == 404) ? true : false;
+      if (error == 404) {
+        result = true;
+      } else if (error == 401) {
+        for (int i = 0; i < arrayUsers.length; i++) {
+          if (arrayUsers[i]['user']['username'] == data.username) {
+            result = false;
+            break;
+          } else {
+            result = true;
+          }
+        }
+      }
     });
     return result;
   }
@@ -42,14 +52,15 @@ class RegisterAPI {
   }
 
   Future<bool> registerUser(User userData) async {
-    bool validatedUser = await validateRegister(userData);
+    List<Map<String, dynamic>> arrayUsers = FakeData.responseApiLoginUser;
+    bool validatedUser = await validateRegister(userData, arrayUsers);
     if (validatedUser) {
-      List<Map<String, dynamic>> arrayUsers = FakeData.responseApiLoginUser;
       int newIdUser = arrayUsers.last['user']['id'] + 1;
       User newUser = createNewUser(userData, newIdUser);
       Auth newAuthUser = createNewAuth(newUser);
 
       arrayUsers.add(newAuthUser.toJson());
+      print(arrayUsers);
       return true;
     }
     throw 409;
