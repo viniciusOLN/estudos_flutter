@@ -1,26 +1,31 @@
 // ignore_for_file: unrelated_type_equality_checks, missing_return, file_names
 
-import 'fake_db.dart';
+import '../fake_db.dart';
 
 class AuthAPI {
   Future<Map<String, dynamic>> verifyUser(
-      List arrayUsers, String username, String password) async {
+      String username, String password) async {
+    List<Map<String, dynamic>> arrayUsers = FakeData.responseApiLoginUser;
+
+    print(arrayUsers);
+
     for (int i = 0; i < arrayUsers.length; i++) {
       String userUsername = arrayUsers[i]['user']['username'];
       String userPassword = arrayUsers[i]['user']['password'];
+
       if (userUsername == username && userPassword == password) {
         return arrayUsers[i];
       }
+
       if ((userUsername == username && userPassword != password) ||
           userUsername != username && userPassword == password) {
-        throw 401;
+        userUsername == username ? throw 409 : throw 401;
       }
-      throw 404;
     }
+    throw 404;
   }
 
   Future<Map<String, dynamic>> autenticateLogin(username, password) async {
-    List<Map<String, dynamic>> responseDb = FakeData.responseApiLoginUser;
-    return await verifyUser(responseDb, username, password);
+    return await verifyUser(username, password);
   }
 }
