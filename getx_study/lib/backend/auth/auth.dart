@@ -7,8 +7,6 @@ class AuthAPI {
       String username, String password) async {
     List<Map<String, dynamic>> arrayUsers = FakeData.responseApiLoginUser;
 
-    print(arrayUsers);
-
     for (int i = 0; i < arrayUsers.length; i++) {
       String userUsername = arrayUsers[i]['user']['username'];
       String userPassword = arrayUsers[i]['user']['password'];
@@ -19,7 +17,7 @@ class AuthAPI {
 
       if ((userUsername == username && userPassword != password) ||
           userUsername != username && userPassword == password) {
-        userUsername == username ? throw 409 : throw 401;
+        throw 401;
       }
     }
     throw 404;
