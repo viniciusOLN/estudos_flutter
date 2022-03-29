@@ -7,6 +7,7 @@ import 'package:getx_study/app/routes/app_routes.dart';
 import 'package:getx_study/app/utils/validator_form.dart';
 import 'package:getx_study/app/utils/widgets/loading.dart';
 import 'package:getx_study/app/utils/widgets/rounded_button.dart';
+import 'package:getx_study/backend/fake_db.dart';
 
 /* 
   O controller é a classe responsável por controlar todo o estado da view dele.
@@ -70,6 +71,8 @@ class LoginController extends GetxController {
   void login() async {
     loadLogin();
     print('aqui vai todo o login');
+    List<Map<String, dynamic>> arrayUsers = FakeData.responseApiLoginUser;
+    print(arrayUsers);
     await repository
         .login(usernameController.text, passwordController.text)
         .then(
