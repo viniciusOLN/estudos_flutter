@@ -60,7 +60,6 @@ class RegisterAPI {
       Auth newAuthUser = createNewAuth(newUser);
 
       arrayUsers.add(newAuthUser.toJson());
-      print(arrayUsers);
       return true;
     }
     throw 409;
