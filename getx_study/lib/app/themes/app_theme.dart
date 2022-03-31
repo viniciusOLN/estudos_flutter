@@ -13,3 +13,4 @@ final ThemeData appThemeData = ThemeData(
 
 final Color SplashScreenInitialColor = Color.fromRGBO(138, 173, 243, 1);
 final Color SplashScreenFinishColor = Color.fromRGBO(233, 240, 243, 1);
+final Color sucessColor = Colors.green;
