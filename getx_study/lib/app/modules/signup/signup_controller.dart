@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_study/app/data/model/user_model.dart';
 import 'package:getx_study/app/data/repository/register_repository.dart';
+import 'package:getx_study/app/routes/app_routes.dart';
+import 'package:getx_study/app/utils/clear_form_fields.dart';
 import 'package:getx_study/app/utils/validator_form.dart';
+import 'package:getx_study/app/utils/widgets/dialog_notification.dart';
 import 'package:getx_study/app/utils/widgets/loading.dart';
 import 'package:getx_study/app/utils/widgets/rounded_button.dart';
 
@@ -14,13 +17,19 @@ class SignUpController extends GetxController {
   bool showConfirmPassword = false;
   bool confirmPasswordEmpty = false;
   bool loadingRegister = false;
-  String errorMessageInputEmpty = "Campo vazio!";
-  String errorMessageConfirmPasswordEmpty = "Campo vazio!";
+  String errorMessageInputEmpty;
+  String errorMessageConfirmPasswordEmpty;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   ValidatorForm validate;
   RegisterRepository repository = Get.find();
+  final int durationEvent = 1000;
+
+  void redirectToLogin() {
+    FormFields.clearLoginFields();
+    Get.toNamed(Routes.LOGIN);
+  }
 
   void statePassword() {
     update(['inputPassword']);
@@ -59,6 +68,7 @@ class SignUpController extends GetxController {
   }
 
   bool validateForm() {
+    errorMessageInputEmpty = "Campo vazio!";
     loadControllers();
     Map<String, bool> formValidated = validate.validateForm();
 
@@ -89,17 +99,25 @@ class SignUpController extends GetxController {
 
   void register() async {
     stateLoadingButtonRegister();
-    //passar um user e nao auth no provider, no repository e acho q na api tbm
-    User newUserData = User(
-        username: usernameController.text.trim(),
-        password: passwordController.text.trim());
-    await repository
-        .register(newUserData)
-        .then((value) => print(value))
-        .onError((error, stackTrace) => print(error));
 
-    Future.delayed(const Duration(milliseconds: 1000), () {
-      stateLoadingButtonRegister();
+    User newUserData = User(
+      username: usernameController.text.trim(),
+      password: passwordController.text.trim(),
+    );
+
+    await repository.register(newUserData).then((value) {
+      redirectToLogin();
+      CustomNotification.showNotification(
+        'CADASTRO',
+        'Usuário Cadastrado com sucesso!',
+      );
+    }).onError((error, stackTrace) {
+      if (error == 409) {
+        errorMessageInputEmpty = "Usuário já cadastrado!";
+        usernameEmpty = true;
+        update(['inputUsername']);
+      }
     });
+    stateLoadingButtonRegister();
   }
 }
