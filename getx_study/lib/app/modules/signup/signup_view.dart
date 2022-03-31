@@ -82,7 +82,7 @@ class SignUpPage extends GetView<SignUpController> {
                 SizedBox(height: Get.height * 0.03),
                 AlreadyHaveAnAccountCheck(
                   login: false,
-                  press: () => Get.toNamed('/login'),
+                  press: controller.redirectToLogin,
                 ),
                 SizedBox(height: Get.height * 0.01),
               ],
