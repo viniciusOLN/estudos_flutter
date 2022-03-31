@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_study/app/modules/welcome/welcome_controller.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:getx_study/app/routes/app_routes.dart';
 import 'package:getx_study/app/themes/app_theme.dart';
 import 'package:getx_study/app/utils/widgets/background.dart';
 import 'package:getx_study/app/utils/widgets/rounded_button.dart';
@@ -31,7 +32,7 @@ class WelcomePage extends GetView<WelcomeController> {
               SizedBox(height: size.height * 0.05),
               RoundedButton(
                 text: "ENTRAR",
-                press: () => Get.toNamed('/login'),
+                press: () => Get.toNamed(Routes.LOGIN),
               ),
               RoundedButton(
                 text: "CADASTRAR",
