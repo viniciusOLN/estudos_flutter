@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getx_study/app/data/model/auth_model.dart';
 import 'package:getx_study/app/data/repository/auth_repository.dart';
 import 'package:getx_study/app/routes/app_routes.dart';
+import 'package:getx_study/app/utils/clear_form_fields.dart';
 import 'package:getx_study/app/utils/validator_form.dart';
 import 'package:getx_study/app/utils/widgets/loading.dart';
 import 'package:getx_study/app/utils/widgets/rounded_button.dart';
@@ -28,6 +29,11 @@ class LoginController extends GetxController {
   AuthRepository repository = Get.find();
   Auth user;
   final box = GetStorage(Routes.STORAGEGET);
+
+  void redirectToRegister() {
+    FormFields.clearSignUpFields();
+    Get.toNamed(Routes.SIGNUP);
+  }
 
   void statePassword() {
     update(['inputPassword']);
@@ -71,8 +77,6 @@ class LoginController extends GetxController {
 
   void login() async {
     loadLogin();
-    print('aqui vai todo o login');
-    List<Map<String, dynamic>> arrayUsers = FakeData.responseApiLoginUser;
     await repository
         .login(usernameController.text, passwordController.text)
         .then(
@@ -84,10 +88,13 @@ class LoginController extends GetxController {
         .catchError((error) {
       if (error == 404) {
         usernameEmpty = true;
-        textFieldEmpty = "Usuário não cadastrado";
+        textFieldEmpty = "Usuário não cadastrado.";
         update(['inputUsername']);
+      } else if (error == 401) {
+        passwordEmpty = true;
+        textFieldEmpty = "Usuário/senha inválidos.";
+        update(['inputPassword']);
       }
-      print(error);
     });
     // //using future just to test the change of 'loadingLogin' variable,
     //after using the async functions, this part will be removed.
