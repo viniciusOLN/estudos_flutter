@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:getx_study/app/data/repository/auth_repository.dart';
 import 'package:getx_study/app/modules/login/login_controller.dart';
 import 'package:getx_study/app/modules/signup/signup_controller.dart';
 
