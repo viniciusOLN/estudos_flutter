@@ -8,7 +8,6 @@ import 'package:getx_study/app/utils/clear_form_fields.dart';
 import 'package:getx_study/app/utils/validator_form.dart';
 import 'package:getx_study/app/utils/widgets/loading.dart';
 import 'package:getx_study/app/utils/widgets/rounded_button.dart';
-import 'package:getx_study/backend/fake_db.dart';
 
 /* 
   O controller é a classe responsável por controlar todo o estado da view dele.
