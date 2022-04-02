@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_study/app/modules/home/widgets/bottom_navigation.dart';
+import 'controllers/custom_bar_controller.dart';
 import 'home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -12,10 +13,11 @@ class HomePage extends GetView<HomeController> {
           child: Text('Barber App'),
         ),
       ),
-      body: Column(
-        children: const <Widget>[
-          Text('Oi'),
-        ],
+      body: GetBuilder<ControllerCustomBar>(
+        id: 'currentPage',
+        builder: (_) {
+          return _.currentPage();
+        },
       ),
       bottomNavigationBar: BottomNavCustom(),
     );
