@@ -9,8 +9,6 @@ import 'package:getx_study/app/routes/app_routes.dart';
 */
 
 class HomeController extends GetxController {
-  var count = 0.obs;
-  void increment() => count++;
   final box = GetStorage(Routes.STORAGEGET);
 
   void clearStorageLogin() {
