@@ -12,7 +12,7 @@ class ControllerCustomBar extends GetxController {
   List<NavigationItem> listItens = [
     NavigationItem(
       icon: const Icon(Icons.home),
-      title: const Text('Home'),
+      title: const Text('Início'),
       color: Colors.deepPurpleAccent,
       page: const HomePageBody(),
     ),
@@ -24,7 +24,7 @@ class ControllerCustomBar extends GetxController {
     ),
     NavigationItem(
       icon: const Icon(Icons.person),
-      title: const Text('Profile'),
+      title: const Text('Perfil'),
       color: Colors.cyan[800],
       page: const ProfilePage(),
     ),
