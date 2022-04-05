@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:getx_study/app/data/provider/schedule_provider.dart';
+import 'package:getx_study/app/data/repository/schedule_repository.dart';
 import 'package:getx_study/app/modules/home/home_controller.dart';
 
 /*
@@ -11,5 +13,7 @@ class HomeBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => HomeController());
+    Get.lazyPut(() => ScheduleRepository());
+    Get.lazyPut(() => ScheduleApiClient());
   }
 }
