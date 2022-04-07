@@ -9,6 +9,7 @@ class HomePage extends GetView<HomeController> {
   Widget build(context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(100, 65, 238, 1), //Color(0xff3f51b5),
         title: const Center(
           child: Text('Barber App'),
         ),
@@ -16,7 +17,9 @@ class HomePage extends GetView<HomeController> {
       body: GetBuilder<ControllerCustomBar>(
         id: 'currentPage',
         builder: (_) {
-          return _.currentPage();
+          return Container(
+            child: _.currentPage(),
+          );
         },
       ),
       bottomNavigationBar: BottomNavCustom(),
