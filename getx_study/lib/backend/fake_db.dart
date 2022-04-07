@@ -27,7 +27,7 @@ class FakeData {
   static List<Map<String, dynamic>> responseSchedules = [
     {
       "id": 1,
-      "scheduling_date": "2001-1109T3:4",
+      "scheduling_date": "2001-11-09 12:00",
       "user_id": 1,
       "employee_id": 1,
       "service_id": 1,
@@ -46,7 +46,7 @@ class FakeData {
     },
     {
       "id": 1,
-      "scheduling_date": "2001-1109T3:4",
+      "scheduling_date": "2001-11-09 13:00",
       "user_id": 1,
       "employee_id": 1,
       "service_id": 1,
