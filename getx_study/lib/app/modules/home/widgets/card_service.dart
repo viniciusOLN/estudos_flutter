@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_study/app/themes/app_theme.dart';
 import 'package:intl/intl.dart';
 
 class CardService extends StatelessWidget {
@@ -22,14 +23,14 @@ class CardService extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 15),
       padding: const EdgeInsets.all(20),
       decoration: const BoxDecoration(
-        color: Color.fromRGBO(239, 239, 249, 1),
+        color: colorCard,
         borderRadius: BorderRadius.all(Radius.circular(24)),
       ),
       child: Column(
         children: [
           Row(
             children: <Widget>[
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(right: 10),
                 child: Icon(
                   Icons.build,
@@ -38,12 +39,7 @@ class CardService extends StatelessWidget {
               ),
               Text(
                 categoryService.toUpperCase(),
-                style: TextStyle(
-                  color: Color.fromRGBO(64, 53, 53, 1),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                  fontFamily: 'Inter',
-                ),
+                style: TextThemeDefault.cardTextCategory,
               ),
             ],
           ),
@@ -54,11 +50,9 @@ class CardService extends StatelessWidget {
             children: [
               Text(
                 titleService,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
-                  fontFamily: 'Inter',
-                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextThemeDefault.cardTextTitle,
               ),
               Icon(Icons.keyboard_arrow_right, size: 40),
             ],
@@ -73,11 +67,7 @@ class CardService extends StatelessWidget {
                 children: [
                   Text(
                     "Horário Agendado",
-                    style: TextStyle(
-                      color: Color.fromRGBO(56, 55, 55, 1),
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Inter',
-                    ),
+                    style: TextThemeDefault.cardTextHour,
                   ),
                   SizedBox(height: Get.size.height * 0.006),
                   Row(
@@ -88,9 +78,7 @@ class CardService extends StatelessWidget {
                       ),
                       Text(
                         "${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.parse(dateService))}",
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                        ),
+                        style: TextThemeDefault.baselineTextStyle,
                       ),
                     ],
                   ),
@@ -101,31 +89,17 @@ class CardService extends StatelessWidget {
                 children: [
                   Text(
                     "Valor do serviço",
-                    style: TextStyle(
-                      color: Color.fromRGBO(56, 55, 55, 1),
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Inter',
-                    ),
+                    style: TextThemeDefault.cardTextCostService,
                   ),
                   SizedBox(height: Get.size.height * 0.001),
                   RichText(
                     text: TextSpan(
                       text: 'R\$ ',
-                      style: TextStyle(
-                        color: Color.fromRGBO(3, 3, 3, 1),
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Inter',
-                      ),
+                      style: TextThemeDefault.cardTextAcronymService,
                       children: [
                         TextSpan(
                           text: priceService.toString(),
-                          style: TextStyle(
-                            color: Color.fromRGBO(56, 55, 55, 1),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            fontFamily: 'Inter',
-                          ),
+                          style: TextThemeDefault.cardTextValueService,
                         ),
                       ],
                     ),
