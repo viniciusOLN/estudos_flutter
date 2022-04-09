@@ -13,13 +13,17 @@ class HomePage extends GetView<HomeController> {
         title: const Center(
           child: Text('Barber App'),
         ),
+        actions: [
+          IconButton(
+            onPressed: controller.clearStorageLogin,
+            icon: Icon(Icons.logout),
+          ),
+        ],
       ),
       body: GetBuilder<ControllerCustomBar>(
         id: 'currentPage',
         builder: (_) {
-          return Container(
-            child: _.currentPage(),
-          );
+          return _.currentPage();
         },
       ),
       bottomNavigationBar: BottomNavCustom(),
