@@ -34,7 +34,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                       const Padding(
                         padding: EdgeInsets.only(left: 14, right: 14),
                       ),
-                      InfosUser(),
+                      InfosUser(usuario),
                     ],
                   ),
                 ),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pmu_app_funcionalidade/dados/user.dart';
 
 class InfosUser extends StatelessWidget {
-  User usuario = User();
-  InfosUser({Key key}) : super(key: key);
+  User usuario;
+  InfosUser(this.usuario, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

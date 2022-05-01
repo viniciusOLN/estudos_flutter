@@ -5,6 +5,8 @@ class ItemProfileMenu {
   String subtitle;
   String leading;
   Icon trailing;
+  Function onTap;
 
-  ItemProfileMenu({this.title, this.subtitle, this.leading, this.trailing});
+  ItemProfileMenu(
+      {this.title, this.subtitle, this.leading, this.trailing, this.onTap});
 }

@@ -107,13 +107,7 @@ Future relatorioFeedback(context) {
         actions: <Widget>[
           BotaoFormatado(() {
             if (textoFeedback.text.isEmpty) {
-              print('vazio irmao');
-              // showDialog(
-              //   context: context,
-              //   builder: (context) {
-              //     return
-              //   },
-              // );
+              print('vazio irmao');              
               showDialog<void>(
                 context: context,
                 builder: (context) {

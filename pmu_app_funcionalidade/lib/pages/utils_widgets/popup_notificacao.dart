@@ -85,9 +85,10 @@ class PopupNotificacaoFormularioInvalida extends StatelessWidget {
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          padding: const EdgeInsets.all(10),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -99,7 +100,7 @@ class PopupNotificacaoFormularioInvalida extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(
                   Icons.close,

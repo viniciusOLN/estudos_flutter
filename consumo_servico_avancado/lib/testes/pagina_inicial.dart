@@ -84,7 +84,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                           _controllerSobre.text,
                           _controllerTitulo.text);
                       setState(() {
-                        _postagens.add(novoPost);
+                        _postagens.insert(_postagens.length, novoPost);
                       });
                       Navigator.pop(context);
                     }

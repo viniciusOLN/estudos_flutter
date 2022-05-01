@@ -16,7 +16,7 @@ class HomeController extends GetxController {
   final box = GetStorage(Routes.STORAGEGET);
   final repository = Get.find<ScheduleRepository>();
   List<Schedule> listSchedules = [];
-  Auth auth;
+  Auth auth = Auth();
 
   @override
   void onInit() {
@@ -41,7 +41,7 @@ class HomeController extends GetxController {
     );
   }
 
-  void clearStorageLogin() {
+  void logout() {
     box.erase();
     Get.offAllNamed('/welcome');
   }

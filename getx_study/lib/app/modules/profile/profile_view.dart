@@ -15,10 +15,10 @@ class ProfilePage extends GetView<ProfileController> {
         children: [
           //SizedBox(height: Get.height * 0.02),
           CircleAvatar(
-            maxRadius: 48,
+            maxRadius: Get.size.width > 500 ? 48 : 30,
             child: Icon(
               Icons.person,
-              size: 60,
+              size: Get.size.width > 500 ? 60 : 20,
             ),
           ),
           Center(
@@ -41,7 +41,7 @@ class ProfilePage extends GetView<ProfileController> {
               ),
               color: Colors.white,
             ),
-            height: 120,
+            height: Get.size.width > 500 ? 120 : 80,
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -51,7 +51,9 @@ class ProfilePage extends GetView<ProfileController> {
                     children: <Widget>[
                       IconButton(
                         icon: Image.asset('assets/wallet.png'),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed('/payments');
+                        },
                       ),
                       Text(
                         'Pagamentos',
@@ -64,7 +66,9 @@ class ProfilePage extends GetView<ProfileController> {
                     children: <Widget>[
                       IconButton(
                         icon: Image.asset('assets/truck.png'),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed('/schedules');
+                        },
                       ),
                       Text(
                         'Agendamentos',
@@ -77,7 +81,9 @@ class ProfilePage extends GetView<ProfileController> {
                     children: <Widget>[
                       IconButton(
                         icon: Image.asset('assets/card.png'),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed('/ratings');
+                        },
                       ),
                       Text(
                         'Avaliações',
@@ -109,7 +115,7 @@ class ProfilePage extends GetView<ProfileController> {
                         height: 30,
                       ),
                       trailing: item.trailing,
-                      onTap: () {},
+                      onTap: item.onTap,
                     ),
                   ),
                 );

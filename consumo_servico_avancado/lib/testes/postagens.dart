@@ -1,5 +1,5 @@
 class Post {
-  int _idPost;
+  int _idPost = 0;
   String _autor;
   String _titulo;
   String _sobrePostagem;
@@ -7,7 +7,10 @@ class Post {
 
   Post(this._autor, this._conteudoPostagem, this._sobrePostagem, this._titulo);
 
-  int get idPost => this._idPost;
+  int get idPost {
+    this._idPost = this._idPost + 1;
+    return this._idPost;
+  }
 
   String get autor => this._autor;
 
