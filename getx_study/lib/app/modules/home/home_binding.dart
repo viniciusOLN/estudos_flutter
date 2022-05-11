@@ -4,6 +4,7 @@ import 'package:getx_study/app/data/repository/schedule_repository.dart';
 import 'package:getx_study/app/modules/home/controllers/custom_bar_controller.dart';
 import 'package:getx_study/app/modules/home/home_controller.dart';
 import 'package:getx_study/app/modules/profile/profile_controller.dart';
+import 'package:getx_study/app/modules/search/search_controller.dart';
 
 /*
   A binding é responsável por injetar dependências dentro da view.
@@ -19,5 +20,6 @@ class HomeBinding implements Bindings {
     Get.lazyPut(() => ScheduleApiClient());
     Get.lazyPut(() => ControllerCustomBar());
     Get.lazyPut(() => ProfileController());
+    Get.lazyPut(() => SearchController());
   }
 }
