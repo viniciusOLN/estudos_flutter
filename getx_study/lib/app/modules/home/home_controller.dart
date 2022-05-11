@@ -1,8 +1,10 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getx_study/app/data/model/auth_model.dart';
 import 'package:getx_study/app/data/model/schedule_model.dart';
 import 'package:getx_study/app/data/repository/schedule_repository.dart';
+import 'package:getx_study/app/modules/search/search_controller.dart';
 import 'package:getx_study/app/routes/app_routes.dart';
 import 'package:getx_study/app/utils/widgets/dialog_notification.dart';
 
@@ -15,13 +17,16 @@ import 'package:getx_study/app/utils/widgets/dialog_notification.dart';
 class HomeController extends GetxController {
   final box = GetStorage(Routes.STORAGEGET);
   final repository = Get.find<ScheduleRepository>();
+  final searchController = Get.put(SearchController());
   List<Schedule> listSchedules = [];
   Auth auth = Auth();
 
   @override
-  void onInit() {
+  void onInit() async {
     loadData();
-    auth = box.read('authUser');
+    auth = Auth.fromJson(box.read('authUser'));
+    LocationPermission permission = await Geolocator.requestPermission();
+    searchController.getUserLocation();
     super.onInit();
   }
 
