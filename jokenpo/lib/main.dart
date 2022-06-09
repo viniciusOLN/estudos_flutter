@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jokenpo/pagina_inicial.dart';
+import 'package:jokenpo/app/pages/pagina_inicial.dart';
 
 void main() {
   runApp(MyApp());
