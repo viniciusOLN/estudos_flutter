@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 import '../controllers/game_controller.dart';
 
 class PaginaInicial extends StatefulWidget {
+  const PaginaInicial({Key key}) : super(key: key);
+
   @override
   _PaginaInicialState createState() => _PaginaInicialState();
 }
@@ -16,15 +17,16 @@ class _PaginaInicialState extends State<PaginaInicial> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Jokenpo')),
+        title: Text('Jokenpo'),
       ),
       body: Column(
-
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(top:20.0),
-            child: Text('PONTUAÇÃO: USUARIO: ${controller.userPoints} | APP: ${controller.appPoints}',
-            textAlign: TextAlign.center,),
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Text(
+              'PONTUAÇÃO: USUARIO: ${controller.userPoints} | APP: ${controller.appPoints}',
+              textAlign: TextAlign.center,
+            ),
           ),
           Padding(
             padding: EdgeInsets.only(top: 32, bottom: 16),
@@ -97,19 +99,21 @@ class _PaginaInicialState extends State<PaginaInicial> {
               ],
             ),
           ),
-        Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: ElevatedButton(
-            onPressed: () {
-              setState(() {
-                _imagemDoMomento = 'padrao';
-                controller.userPoints = 0;
-                controller.appPoints = 0;
-                _mensagem = '';
-              });
-            }, child: Text('REINICIAR')),
-        ),
-          Text('Alunos: Victor Cavalcante Vieira, João Vitor, Vinicius Oliveira')
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _imagemDoMomento = 'padrao';
+                    controller.userPoints = 0;
+                    controller.appPoints = 0;
+                    _mensagem = '';
+                  });
+                },
+                child: Text('REINICIAR')),
+          ),
+          Text(
+              'Alunos: Victor Cavalcante Vieira, João Vitor, Vinicius Oliveira')
         ],
       ),
     );
